@@ -37,6 +37,10 @@ public class ListStack implements Stack {
 		return poppedValue;
 	}
 
+	public Object peek() {
+		return top.element;
+	}
+
 	/** Print elements of the stack, starting at the top */
 	public String toString() {
 		Node stackPtr = top;
