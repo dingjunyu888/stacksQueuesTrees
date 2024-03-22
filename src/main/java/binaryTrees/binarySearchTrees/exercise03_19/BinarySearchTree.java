@@ -28,6 +28,13 @@ class BinarySearchTree {
         BSTNode current = root;
         while (current != null) {
             // FILL IN CODE
+            if(elem == current.data) {
+                return true;
+            }else if(elem < current.data){
+                current = current.left;
+            }else{
+                current = current.right;
+            }
 
         }
         return false;
@@ -35,8 +42,17 @@ class BinarySearchTree {
 
     public boolean findRecursive(int elem, BSTNode root) {
         // FILL IN CODE
-
-        return false;
+        if(root == null){
+            return false;
+        }
+        if(root.data == elem){
+            return true;
+        }
+        if(elem < root.data){
+            return findRecursive(elem, root.left);
+        }else{
+            return findRecursive(elem, root.right);
+        }
     }
 
     public void insertIterative(int elem) {
@@ -49,18 +65,35 @@ class BinarySearchTree {
         while (current != null) {
             if (elem >= current.data) {
                 // FILL IN CODE: update prev and current
+                prev = current;
+                current = current.right;
             }
             else {
                 // FILL IN CODE: update prev and current
-
+                prev = current;
+                current = current.left;
             }
         }
         if (elem < prev.data) {
             // FILL IN CODE: create a new node and attach to prev
+            prev.left = new BSTNode(elem);
         }
         else {
             // FILL IN CODE: create a new node and attach to prev
+            prev.right = new BSTNode(elem);
         }
+    }
+
+    public BSTNode insertRecursive(int elem, BSTNode root){
+        if(root == null){
+            return new BSTNode(elem);
+        }
+        if(elem < root.data){
+            root.left = insertRecursive(elem, root.left);
+        }else{
+            root.right = insertRecursive(elem, root.right);
+        }
+        return root;
     }
 
     private void printPreorder(BSTNode root) {
